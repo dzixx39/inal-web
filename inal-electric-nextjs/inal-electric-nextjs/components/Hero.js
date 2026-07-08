@@ -2,15 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ArrowRight, Search } from "lucide-react";
-import { PRODUCTS, CATEGORIES } from "@/data/products";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   const [angle, setAngle] = useState(-40);
   const dir = useRef(1);
-  const router = useRouter();
-  const [q, setQ] = useState("");
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -25,11 +21,6 @@ export default function Hero() {
 
   const value = (((angle + 40) / 80) * 16).toFixed(1);
 
-  function handleSearch(e) {
-    e.preventDefault();
-    router.push(q.trim() ? `/shop?q=${encodeURIComponent(q.trim())}` : "/shop");
-  }
-
   return (
     <section className="relative bg-white overflow-hidden">
       <div className="absolute inset-0 blueprint-grid opacity-[0.06]" />
@@ -38,65 +29,45 @@ export default function Hero() {
         <div>
           <div className="font-mono-data text-accent-dim text-[11.5px] sm:text-[12.5px] tracking-[2px] uppercase flex items-center gap-2 mb-4">
             <span className="w-[22px] h-px bg-accent-dim inline-block" />
-            {PRODUCTS.length}+ artikala · {CATEGORIES.length} kategorija
+            Mjerenje · Regulacija · Automatizacija
           </div>
           <h1 className="font-display text-text-dark text-[30px] sm:text-[38px] md:text-[46px] font-bold leading-[1.15] mb-5 tracking-tight">
-            Sve za vaše{" "}
+            Precizna oprema za{" "}
             <span className="text-accent-dim relative">
-              postrojenje
+              postrojenja
               <svg className="absolute left-0 -bottom-1 w-full" height="6" viewBox="0 0 100 6" preserveAspectRatio="none">
                 <path d="M0,4 Q50,0 100,4" stroke="#5E75BE" strokeWidth="3" fill="none" />
               </svg>
             </span>{" "}
-            na jednom mjestu.
+            koja ne smiju stati.
           </h1>
-          <p className="text-[#5C6B76] text-[15px] sm:text-base leading-relaxed max-w-[480px] mb-7">
-            Industrijski dijelovi, mjerno-regulaciona oprema i automatika —
-            pretražite katalog ili zatražite ponudu za specifičan artikal.
+          <p className="text-[#5C6B76] text-[15px] sm:text-base leading-relaxed max-w-[480px] mb-8">
+            Prodaja industrijskih dijelova, mjerno-regulacione opreme i
+            kompletna instalacija i upravljanje postrojenjima — od
+            projektovanja do puštanja u rad.
           </p>
-
-          <form onSubmit={handleSearch} className="flex mb-6 max-w-[480px]">
-            <div className="relative flex-1">
-              <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8C9BA6]" />
-              <input
-                type="text"
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Pretraži proizvod, šifru ili brend..."
-                className="w-full border border-[#D8DEE1] rounded-l-md pl-11 pr-4 py-3.5 text-sm outline-none focus:border-accent"
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-accent text-white px-5 sm:px-6 rounded-r-md font-semibold text-[14.5px] whitespace-nowrap"
-            >
-              Pretraži
-            </button>
-          </form>
-
           <div className="flex flex-wrap gap-3.5">
             <Link
               href="/shop"
-              className="bg-text-dark text-white px-5 py-3 rounded-md font-semibold text-[14px] flex items-center gap-2"
+              className="bg-accent text-white px-5 py-3.5 rounded-md font-semibold text-[14.5px] flex items-center gap-2 shadow-sm shadow-accent/20"
             >
-              Pogledaj kompletan Shop <ArrowRight size={15} />
+              Pogledaj Shop <ArrowRight size={16} />
             </Link>
             <Link
               href="/kontakt"
-              className="bg-white text-text-dark border border-[#D8DEE1] px-5 py-3 rounded-md font-semibold text-[14px]"
+              className="bg-white text-text-dark border border-[#D8DEE1] px-5 py-3.5 rounded-md font-semibold text-[14.5px]"
             >
-              Zatraži ponudu
+              Zatraži konsultacije
             </Link>
           </div>
-
           <div className="flex flex-wrap gap-7 sm:gap-9 mt-10 sm:mt-11 pt-6 sm:pt-7 border-t border-[#E4E8EA]">
             <div>
-              <div className="font-display text-text-dark text-xl sm:text-2xl font-bold">{PRODUCTS.length}+</div>
-              <div className="text-[#5C6B76] text-xs mt-0.5">Artikala u katalogu</div>
+              <div className="font-display text-text-dark text-xl sm:text-2xl font-bold">1.200+</div>
+              <div className="text-[#5C6B76] text-xs mt-0.5">Instaliranih uređaja</div>
             </div>
             <div>
-              <div className="font-display text-text-dark text-xl sm:text-2xl font-bold">{CATEGORIES.length}</div>
-              <div className="text-[#5C6B76] text-xs mt-0.5">Kategorija</div>
+              <div className="font-display text-text-dark text-xl sm:text-2xl font-bold">180+</div>
+              <div className="text-[#5C6B76] text-xs mt-0.5">Realizovanih projekata</div>
             </div>
             <div>
               <div className="font-display text-text-dark text-xl sm:text-2xl font-bold">24/7</div>

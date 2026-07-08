@@ -1,15 +1,30 @@
 import Link from "next/link";
-import { Boxes, Headphones, BadgeCheck, FileText, ChevronRight } from "lucide-react";
+import { Gauge, Wrench, Cpu, ShieldCheck, FileText, ChevronRight } from "lucide-react";
 import Hero from "@/components/Hero";
-import CategoryGrid from "@/components/CategoryGrid";
 import ProductCard from "@/components/ProductCard";
 import { PRODUCTS } from "@/data/products";
 
-const TRUST_POINTS = [
-  { icon: Boxes, title: "889+ artikala", desc: "Kompletan katalog na jednom mjestu" },
-  { icon: FileText, title: "Ponuda u 24h", desc: "Brz odgovor na svaki upit" },
-  { icon: BadgeCheck, title: "Provjereni brendovi", desc: "Schneider, ETI, Balluff i drugi" },
-  { icon: Headphones, title: "Stručna podrška", desc: "Pomoć pri izboru opreme" },
+const SERVICES = [
+  {
+    icon: Wrench,
+    title: "Prodaja industrijskih dijelova",
+    desc: "Originalni i kompatibilni dijelovi za sve tipove postrojenja, sa brzom isporukom.",
+  },
+  {
+    icon: Cpu,
+    title: "Upravljanje postrojenjima",
+    desc: "Nadzor, optimizacija i daljinsko upravljanje industrijskim procesima.",
+  },
+  {
+    icon: Gauge,
+    title: "Mjerno-regulaciona oprema",
+    desc: "Senzori, pretvarači i regulatori za precizno mjerenje i kontrolu procesa.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Instalacija i servis",
+    desc: "Stručna montaža, puštanje u rad i redovno održavanje opreme.",
+  },
 ];
 
 export default function HomePage() {
@@ -20,36 +35,37 @@ export default function HomePage() {
       seenCats.add(p.category);
       featured.push(p);
     }
-    if (featured.length === 8) break;
+    if (featured.length === 6) break;
   }
 
   return (
     <main>
       <Hero />
 
-      {/* TRUST BAR */}
-      <section className="bg-white border-y border-[#E4E8EA]">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-6 py-6 sm:py-7">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-            {TRUST_POINTS.map((t, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#F4F6FB] text-accent-dim flex items-center justify-center flex-shrink-0">
-                  <t.icon size={18} />
+      {/* SERVICES */}
+      <section className="py-14 sm:py-20 bg-light">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-6">
+          <div className="mb-8 sm:mb-9">
+            <div className="font-mono-data text-accent-dim text-xs tracking-[2px] uppercase mb-2">
+              Šta radimo
+            </div>
+            <h2 className="font-display text-[24px] sm:text-[28px] md:text-[30px] font-bold tracking-tight">
+              Usluge i djelatnosti
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E4E8EA] border border-[#E4E8EA] rounded-xl overflow-hidden">
+            {SERVICES.map((s, i) => (
+              <div className="bg-white p-6 sm:p-7" key={i}>
+                <div className="text-accent mb-4">
+                  <s.icon size={26} />
                 </div>
-                <div>
-                  <div className="font-semibold text-[13px] sm:text-[13.5px] leading-tight">{t.title}</div>
-                  <div className="text-[11.5px] text-[#8C9BA6] leading-tight mt-0.5 hidden sm:block">
-                    {t.desc}
-                  </div>
-                </div>
+                <div className="font-display font-semibold text-[15.5px] mb-2">{s.title}</div>
+                <div className="text-[#5C6B76] text-[13.5px] leading-relaxed">{s.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* CATEGORY GRID */}
-      <CategoryGrid />
 
       {/* FEATURED PRODUCTS */}
       <section className="py-14 sm:py-20 bg-light">
@@ -70,7 +86,7 @@ export default function HomePage() {
               Kompletan shop <ChevronRight size={16} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {featured.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}

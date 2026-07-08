@@ -19,10 +19,9 @@ export default function ShopPage() {
 function ShopContent() {
   const searchParams = useSearchParams();
   const initialCat = searchParams.get("kategorija") || "Sve";
-  const initialQuery = searchParams.get("q") || "";
 
   const [activeCat, setActiveCat] = useState(initialCat);
-  const [query, setQuery] = useState(initialQuery);
+  const [query, setQuery] = useState("");
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
